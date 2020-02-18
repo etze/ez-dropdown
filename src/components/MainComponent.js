@@ -60,7 +60,10 @@ export default function MainComponent(props) {
         {state.loading ? (
           <div className="loading">Fetching Source Data...</div>
         ) : state.showResult ? (
-          <ResultComponent results={state.results} />
+          <ResultComponent
+            results={state.results}
+            selectedValue={props.selectedValue}
+          />
         ) : null}
       </div>
     </div>

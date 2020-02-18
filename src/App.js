@@ -12,6 +12,10 @@ function App() {
   //   console.log(state);
   //   setState();
   // };
+  const handleValue = value => {
+    // proof of the 'returning value' concept
+    console.log(value);
+  };
   return (
     <div className="App">
       <MainComponent
@@ -23,6 +27,7 @@ function App() {
         // or
         // {secondaryData}
         dataSource={state ? primaryData : secondaryData}
+        selectedValue={handleValue}
       />
       {/* The proof input data can change at ANY TIME */}
       <button onClick={() => setState(!state)}>Switch Data Source</button>
