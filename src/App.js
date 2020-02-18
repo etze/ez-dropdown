@@ -27,6 +27,7 @@ function App() {
         // or
         // {secondaryData}
         dataSource={state ? primaryData : secondaryData}
+        dataSourceName={state ? "From API" : "From Array"}
         selectedValue={handleValue}
       />
       {/* The proof input data can change at ANY TIME */}

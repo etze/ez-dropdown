@@ -37,6 +37,7 @@ export default function MainComponent(props) {
     });
   }, [props.dataSource]);
 
+  // handling input change
   const handleInputChange = e => {
     if (!state.showResult) {
       handleState("showResult", true);
@@ -56,7 +57,11 @@ export default function MainComponent(props) {
     <div className="root">
       <div>{props.showResult}</div>
       <div>
-        <AutoComplete data={state} handleInputChange={handleInputChange} />
+        <AutoComplete
+          data={state}
+          handleInputChange={handleInputChange}
+          placeholderLabel={props.dataSourceName}
+        />
         {state.loading ? (
           <div className="loading">Fetching Source Data...</div>
         ) : state.showResult ? (

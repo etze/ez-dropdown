@@ -4,7 +4,7 @@ const AutoCompete = props => {
   return (
     <div className="inputWrapper">
       <input
-        placeholder="Please Enter a Name..."
+        placeholder={`Please Enter a Name ${props.placeholderLabel}`}
         onChange={props.handleInputChange}
       ></input>
     </div>

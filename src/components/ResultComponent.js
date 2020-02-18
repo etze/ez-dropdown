@@ -9,6 +9,7 @@ export default function ResultComponent(props) {
             className="resultItem"
             // proof on clicking concept // any other function can implement here:
             onClick={() => props.selectedValue(item)}
+            // check console for handling result in App.js (parent component)
             key={index}
           >
             {item}
