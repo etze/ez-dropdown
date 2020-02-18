@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import MainComponent from "./components/MainComponent";
+import { primaryData, secondaryData } from "./config/data";
 
 function App() {
+  const [state, setState] = React.useState(true);
+  // a proof that array works as well
+
+  // const handleChangingDataSourc = () => {
+  //   console.log(state);
+  //   setState();
+  // };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MainComponent
+        // dataSource can accept a normal array or an object with link and parameter properties:
+        // {{
+        //   link: "https://jsonplaceholder.typicode.com/users",
+        //   parameter: "name"
+        // }}
+        // or
+        // {secondaryData}
+        dataSource={state ? primaryData : secondaryData}
+      />
+      {/* The proof input data can change at ANY TIME */}
+      <button onClick={() => setState(!state)}>Switch Data Source</button>
     </div>
   );
 }
