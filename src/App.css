@@ -6,9 +6,10 @@
 }
 .results {
   height: 100%;
-  -webkit-box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.41);
-  -moz-box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.41);
-  box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.41);
+  -webkit-box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.315);
+  -moz-box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.315);
+  box-shadow: -5px 6px 5px 1px rgba(224, 220, 224, 0.315);
+  border-bottom: 1px solid black;
 }
 .resultItem {
   text-align: left;
