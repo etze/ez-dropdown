@@ -2,6 +2,7 @@ import React from "react";
 import AutoComplete from "./AutoComplete";
 import ResultComponent from "./ResultComponent";
 import "../App.css";
+import Axios from "axios";
 
 export default function MainComponent(props) {
   const [state, setState] = React.useState({
@@ -10,33 +11,46 @@ export default function MainComponent(props) {
     loading: true
   });
 
-  // generic state handler (my favorite)
+  // generic state handler
   const handleState = (stateName, stateValue) => {
     setState(prevState => ({ ...prevState, [stateName]: stateValue }));
   };
 
   // managing data source and data source change
   React.useEffect(() => {
+    // console.log("effected");
     if (props.dataSource.link) {
-      fetch(props.dataSource.link)
-        .then(response => response.json())
-        .then(json => {
+      Axios.get(props.dataSource.link)
+        .then(function(response) {
           let options = [];
-          json.map(item => options.push(item[props.dataSource.parameter]));
+          response.data.map(item =>
+            options.push(item[props.dataSource.parameter])
+          );
           handleState("options", options);
           handleState("loading", false);
+        })
+        .catch(function(error) {
+          console.log(error);
         });
     } else {
       handleState("options", props.dataSource);
       handleState("loading", false);
     }
-    document.querySelector(".App").addEventListener("click", e => {
-      if (e.toElement.className !== "resultItem") {
-        handleState("showResult", false);
-      }
-    });
   }, [props.dataSource]);
-
+  React.useEffect(() => {
+    // console.log("show result touched");
+    if (state.showResult) {
+      document.querySelector(".App").addEventListener(
+        "click",
+        e => {
+          if (e.toElement.className !== "resultItem") {
+            handleState("showResult", false);
+          }
+        },
+        { once: true }
+      );
+    }
+  }, [state.showResult]);
   // handling input change
   const handleInputChange = e => {
     if (!state.showResult) {
@@ -52,7 +66,10 @@ export default function MainComponent(props) {
         )
     );
   };
-
+  const handleValue = item => {
+    props.selectedValue(item);
+    handleState("showResult", false);
+  };
   return (
     <div className="root">
       <div>{props.showResult}</div>
@@ -67,7 +84,7 @@ export default function MainComponent(props) {
         ) : state.showResult ? (
           <ResultComponent
             results={state.results}
-            selectedValue={props.selectedValue}
+            selectedValue={handleValue}
           />
         ) : null}
       </div>
